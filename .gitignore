@@ -1,0 +1,9 @@
+#Mac files
+.DS_Store
+
+#Vs Code
+.vscode
+
+#secret files
+.env
+-docker/.env

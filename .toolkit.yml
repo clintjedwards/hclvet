@@ -1,0 +1,6 @@
+repository: clintjedwards/tfvet
+commands:
+  build:
+    - make build-protos
+    - go mod tidy
+    - go build -ldflags '-X "github.com/clintjedwards/{{.ProjectName}}/cli.appVersion={{.VersionFull}}"' -o {{.Path}}
