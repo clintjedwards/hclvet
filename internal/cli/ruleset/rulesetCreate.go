@@ -67,7 +67,7 @@ version = "0.0.0"
 		return err
 	}
 
-	//TODO(clintjedwards): Take this from the appcfg package and stop declaring it everywhere
+	// TODO(clintjedwards): Take this from the appcfg package and stop declaring it everywhere
 	const rulesetFileName = "ruleset.hcl"
 	rulesetFilePath := fmt.Sprintf("%s/%s", currentDir, rulesetFileName)
 

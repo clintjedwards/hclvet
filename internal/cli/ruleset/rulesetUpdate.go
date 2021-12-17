@@ -79,7 +79,6 @@ func runUpdate(cmd *cobra.Command, args []string) error {
 }
 
 func updateRuleset(s *state, ruleset models.Ruleset) error {
-
 	s.fmt.Print("Retrieveing ruleset")
 	err := getRemoteRuleset(ruleset.Repository, appcfg.RepoPath(ruleset.Name))
 	if err != nil {

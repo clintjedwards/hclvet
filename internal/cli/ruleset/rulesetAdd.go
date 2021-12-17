@@ -4,12 +4,11 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"hash/fnv"
 	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
-
-	"hash/fnv"
 
 	"github.com/clintjedwards/hclvet/internal/cli/appcfg"
 	hclvetPlugin "github.com/clintjedwards/hclvet/internal/plugin"
@@ -89,7 +88,6 @@ func generateHash(s string) string {
 // TODO(clintjedwards): This by default just discards any logs from the client.
 // Change this to only do this above the loglevel debug.
 func getRulePluginClient(ruleset, ruleID string) (client *plugin.Client, rule hclvetPlugin.RuleDefinition, err error) {
-
 	tmpPluginName := "hclvetPlugin"
 
 	client = plugin.NewClient(&plugin.ClientConfig{

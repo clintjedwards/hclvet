@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 	"time"
 
 	"github.com/Masterminds/semver"
@@ -70,6 +71,17 @@ func newState(initialFmtMsg, format string) (*state, error) {
 //
 // See https://github.com/hashicorp/go-getter#url-format for accepted formats.
 func getRemoteRuleset(srcPath, dstPath string) error {
+	// For some reason the go-getter file resolution seems to be not working as documented.
+	// Particularly when we call a relative path we get a failure.
+	// To mitigate this somewhat we check if the user is trying to call a relative path and if so
+	// then just use go's way of getting the absolute path.
+	if strings.HasPrefix(srcPath, "./") || strings.HasPrefix(srcPath, "../") {
+		absSrcPath, err := filepath.Abs(srcPath)
+		if err == nil {
+			srcPath = absSrcPath
+		}
+	}
+
 	_, err := getter.Get(context.Background(), dstPath, srcPath)
 	if err != nil {
 		return err
@@ -94,7 +106,6 @@ func getRemoteRulesetInfo(repoPath string) (rulesetInfo, error) {
 // buildAllRules builds the plugins(rules are plugins) and places the binary
 // underneath the correct ruleset directory.
 func buildAllRules(s *state, ruleset string) error {
-	//return errors.New("test")
 	s.fmt.Print("Opening rules directory")
 
 	file, err := os.Open(appcfg.RepoRulesPath(ruleset))

@@ -13,14 +13,15 @@ import (
 // Will return the underlying os.Stat error if there were any other errors
 func CreateDir(dirPath string) error {
 	_, err := os.Stat(dirPath)
-	if os.IsNotExist(err) {
+	switch {
+	case os.IsNotExist(err):
 		err := os.MkdirAll(dirPath, 0755)
 		if err != nil {
 			return err
 		}
-	} else if os.IsExist(err) {
+	case os.IsExist(err):
 		return nil
-	} else if err != nil {
+	case err != nil:
 		return err
 	}
 

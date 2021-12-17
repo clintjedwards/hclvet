@@ -62,7 +62,6 @@ func humanizeVersion(version string) string {
 }
 
 func setup() error {
-
 	err := utils.CreateDir(appcfg.ConfigPath())
 	if err != nil {
 		log.Println(err)
@@ -75,16 +74,18 @@ func setup() error {
 	}
 
 	_, err = os.Stat(appcfg.ConfigFilePath())
-	if os.IsNotExist(err) {
+
+	switch {
+	case os.IsNotExist(err):
 		err = appcfg.CreateNewFile()
 		if err != nil {
 			log.Println(err)
 			return err
 		}
-	} else if os.IsExist(err) {
-	} else if err != nil {
+	case err != nil:
 		log.Println(err)
 		return err
+	case os.IsExist(err):
 	}
 
 	return nil

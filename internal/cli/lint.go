@@ -74,7 +74,6 @@ func newState(initialFmtMsg, format string) (*state, error) {
 // If the given path is not a directory, but a hcl file instead, it will return a list with
 // only that file included.
 func (s *state) getHCLFiles(paths []string) ([]string, error) {
-
 	tfFiles := []string{}
 
 	for _, path := range paths {
@@ -145,7 +144,7 @@ func runLint(cmd *cobra.Command, args []string) error {
 			log.Fatal(err)
 			return err
 		}
-		defaultPath = defaultPath + "/*"
+		defaultPath += "/*"
 
 		paths = []string{defaultPath}
 	} else {
@@ -193,7 +192,7 @@ func runLint(cmd *cobra.Command, args []string) error {
 			numSkipped++
 			continue
 		}
-		numErrors = numErrors + errorsFound
+		numErrors += errorsFound
 		numFiles++
 		file.Close() // don't defer things that are in loops
 	}
@@ -212,7 +211,6 @@ func runLint(cmd *cobra.Command, args []string) error {
 
 // lintFile orchestrates the process of linting the given file.
 func (s *state) lintFile(file *os.File) (int, error) {
-
 	// Check we have enough memory to store file
 	err := checkAvailMemory(file)
 	if err != nil {
@@ -253,7 +251,7 @@ func (s *state) lintFile(file *os.File) (int, error) {
 				continue
 			}
 
-			errorsFound = errorsFound + numErrors
+			errorsFound += numErrors
 		}
 	}
 

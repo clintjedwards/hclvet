@@ -71,7 +71,7 @@ func createRuleDir(name string) error {
 		return err
 	}
 
-	//TODO(clintjedwards): Take this from the appcfg package and stop declaring it everywhere
+	// TODO(clintjedwards): Take this from the appcfg package and stop declaring it everywhere
 	rulesDirName := "rules"
 	ruleDirPath := fmt.Sprintf("%s/%s/%s", currentDir, rulesDirName, name)
 

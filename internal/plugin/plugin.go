@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/go-plugin"
 )
 
-//TODO(clintjedwards): Clean up and document all of this
+// TODO(clintjedwards): Clean up and document all of this
 
 // This file contains structures that both the plugin and the plugin host has to implement
 

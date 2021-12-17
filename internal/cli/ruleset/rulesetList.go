@@ -119,7 +119,6 @@ func formatAllRulesets(rulesets []models.Ruleset) string {
 }
 
 func formatRuleset(ruleset models.Ruleset) string {
-
 	enabledStr := ""
 	if ruleset.Enabled {
 		enabledStr = "enabled"
