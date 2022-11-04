@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"hash/fnv"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -97,7 +97,7 @@ func getRulePluginClient(ruleset, ruleID string) (client *plugin.Client, rule hc
 		},
 		Cmd: exec.Command(appcfg.RulePath(ruleset, ruleID)),
 		Logger: hclog.New(&hclog.LoggerOptions{
-			Output: ioutil.Discard,
+			Output: io.Discard,
 			Level:  0,
 			Name:   "plugin",
 		}),

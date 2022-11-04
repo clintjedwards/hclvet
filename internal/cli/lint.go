@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -38,7 +38,7 @@ Accepts multiple paths delimited by a space.
 	RunE: runLint,
 	Example: `$ hclvet lint
 $ hclvet lint myfile.tf
-$ hclvet line somefile.tf manyfilesfolder/*`,
+$ hclvet lint somefile.tf manyfilesfolder/*`,
 }
 
 // state contains a bunch of useful state information for the add cli function. This is mostly
@@ -50,7 +50,7 @@ type state struct {
 
 // newState returns a new state object with the fmt initialized
 func newState(initialFmtMsg, format string) (*state, error) {
-	clifmt, err := polyfmt.NewFormatter(polyfmt.Mode(format))
+	clifmt, err := polyfmt.NewFormatter(polyfmt.Mode(format), false)
 	if err != nil {
 		return nil, err
 	}
@@ -217,7 +217,7 @@ func (s *state) lintFile(file *os.File) (int, error) {
 		return 0, err
 	}
 
-	contents, err := ioutil.ReadAll(file)
+	contents, err := io.ReadAll(file)
 	if err != nil {
 		return 0, err
 	}
@@ -269,7 +269,7 @@ func (s *state) runRule(ruleset string, rule models.Rule, filepath string, rawHC
 		},
 		Cmd: exec.Command(appcfg.RulePath(ruleset, rule.ID)),
 		Logger: hclog.New(&hclog.LoggerOptions{
-			Output: ioutil.Discard,
+			Output: io.Discard,
 			Level:  0,
 			Name:   "plugin",
 		}),

@@ -4,7 +4,6 @@ package appcfg
 
 import (
 	"errors"
-	"io/ioutil"
 	"os"
 	"strings"
 
@@ -240,7 +239,7 @@ func (appcfg *Appcfg) writeConfig() error {
 
 	gohcl.EncodeIntoBody(appcfg, f.Body())
 
-	err := ioutil.WriteFile(ConfigFilePath(), f.Bytes(), 0644)
+	err := os.WriteFile(ConfigFilePath(), f.Bytes(), 0o644)
 	if err != nil {
 		return err
 	}

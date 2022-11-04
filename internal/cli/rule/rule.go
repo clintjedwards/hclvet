@@ -29,7 +29,7 @@ type state struct {
 
 // newState returns a new initialized state object
 func newState(initialFmtMsg, format string) (*state, error) {
-	clifmt, err := polyfmt.NewFormatter(polyfmt.Mode(format))
+	clifmt, err := polyfmt.NewFormatter(polyfmt.Mode(format), false)
 	if err != nil {
 		log.Fatal(err)
 		return nil, err

@@ -15,7 +15,7 @@ func CreateDir(dirPath string) error {
 	_, err := os.Stat(dirPath)
 	switch {
 	case os.IsNotExist(err):
-		err := os.MkdirAll(dirPath, 0755)
+		err := os.MkdirAll(dirPath, 0o755)
 		if err != nil {
 			return err
 		}

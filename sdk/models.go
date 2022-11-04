@@ -79,13 +79,14 @@ type RuleError struct {
 //
 // A line that is not a LintError
 // err := json.Unmarshal(logLine, &newError)
-// if err != nil {
-// 	t.Fatal(err)
-// }
+//
+//	if err != nil {
+//		t.Fatal(err)
+//	}
 //
 // if newError.Data.LintError == nil {
 // We know this is not a LintError because this is nil
-//}
+// }
 type LintErrorWrapper struct {
 	Label string `json:"label"`
 	Data  struct {

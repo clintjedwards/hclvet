@@ -45,7 +45,7 @@ type rulesetInfo struct {
 
 // newState returns a new initialized state object
 func newState(initialFmtMsg, format string) (*state, error) {
-	clifmt, err := polyfmt.NewFormatter(polyfmt.Mode(format))
+	clifmt, err := polyfmt.NewFormatter(polyfmt.Mode(format), false)
 	if err != nil {
 		log.Fatal(err)
 		return nil, err
@@ -193,8 +193,8 @@ func buildAllRules(s *state, ruleset string) error {
 }
 
 // verifyRuleset makes sure a downloaded ruleset has the correct structure.
-//	* Makes sure the ruleset has a proper version and name.
-//	* Makes sure the ruleset has a rules folder.
+//   - Makes sure the ruleset has a proper version and name.
+//   - Makes sure the ruleset has a rules folder.
 func verifyRuleset(path string, info rulesetInfo) error {
 	isValidNameErr := validation.NewError("validation_is_valid_name", "must be a valid name; alphanumeric characters and _ or - only")
 	isValidName := validation.NewStringRuleWithError(isValidName, isValidNameErr)

@@ -12,6 +12,8 @@ import (
 	"github.com/clintjedwards/polyfmt"
 	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 var cmdRulesetList = &cobra.Command{
@@ -128,7 +130,8 @@ func formatRuleset(ruleset models.Ruleset) string {
 
 	// Example v1.0.0 (enabled) [2 rule(s)]
 	title := fmt.Sprintf("%s %s (%s) [%d rule(s)]\n\n",
-		strings.Title(ruleset.Name), ruleset.Version, enabledStr, len(ruleset.Rules))
+		cases.Title(language.AmericanEnglish).String(ruleset.Name),
+		ruleset.Version, enabledStr, len(ruleset.Rules))
 
 	headers := []string{"Rule", "Name", "Description", "Enabled"}
 	data := [][]string{}
