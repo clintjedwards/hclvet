@@ -42,12 +42,12 @@
 
 Output demo.gif
 
-Set FontSize 24
-Set Width 1200
-Set Height 600
+Set FontSize 22
+Set Width 1800
+Set Height 1000
 Set Theme { "name": "Eastwood", "black": "#424242", "red": "#ff7675", "green": "#badc58", "yellow": "#ffeaa7", "blue": "#74b9ff", "purple": "#cc99cc", "cyan": "#81ecec", "white": "#d3d0c8", "brightBlack": "#c4c2bb", "brightRed": "#ff7675", "brightGreen": "#badc58", "brightYellow": "#ffeaa7", "brightBlue": "#74b9ff", "brightPurple": "#cc99cc", "brightCyan": "#81ecec", "brightWhite": "#d3d0c8", "background": "#424242", "foreground": "#d3d0c8", "selectionBackground": "#74b9ff", "cursorColor": "#d3d0c8" }
 
-Type "hclvet -h"
+Type "hclvet -v"
 
 Enter
 
@@ -55,19 +55,25 @@ Sleep 500ms
 
 Type "hclvet ruleset add github.com/clintjedwards/hclvet-ruleset-terraform-example"
 
-Enter
-
-Sleep 500ms
-
-Type "hclvet ruleset list example"
+Sleep 1.5s
 
 Enter
 
-Sleep 2.5s
+Sleep 4s
+
+Type "hclvet ruleset list terraform-example"
+
+Sleep 1.5s
+
+Enter
+
+Sleep 6s
 
 Type "hclvet lint ~/Documents/hclvet/internal/testdata/*"
 
+Sleep 1.5s
+
 Enter
 
-Sleep 4.5s
+Sleep 20s
 

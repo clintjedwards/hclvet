@@ -6,8 +6,7 @@ HCL vet is a simplistic, pluggable HCL linter.
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/clintjedwards/hclvet/blob/main/LICENSE)
 
 <a href="https://asciinema.org/a/m4wZebEQZOfsLTcVHgZDTapFz">
-    Click on image for demo
-    <img src="demo.png" />
+    <img src="demo.gif" />
 </a>
 
 ## Features
