@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 	"strings"
-	"time"
 
 	"github.com/clintjedwards/hclvet/internal/cli/appcfg"
 	"github.com/clintjedwards/hclvet/internal/cli/rule"
@@ -50,15 +48,11 @@ func Execute() error {
 }
 
 func humanizeVersion(version string) string {
-	splitVersion := strings.Split(version, "_")
-
-	semver := splitVersion[0]
-	hash := splitVersion[1]
-	i, _ := strconv.Atoi(splitVersion[2])
-	unixTime := time.Unix(int64(i), 0)
-	time := unixTime.Format("Mon Jan 2 15:04 2006")
-
-	return fmt.Sprintf("hclvet %s [%s] %s\n", semver, hash, time)
+	semver, hash, err := strings.Cut(version, "_")
+	if !err {
+		return ""
+	}
+	return fmt.Sprintf("hclvet %s [%s]\n", semver, hash)
 }
 
 func setup() error {
